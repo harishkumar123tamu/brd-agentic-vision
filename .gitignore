@@ -218,3 +218,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+data_local/
+raw/
+frames/
+*.Avi
+*.avi
+*.mp4
+*.jpg
+*.png
