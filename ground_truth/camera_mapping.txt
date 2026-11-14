@@ -1,0 +1,12 @@
+
+Cam 01 = Front cam 1 (4000 x 3000) - Tentative
+Cam 02 = Not checked yet
+Cam 03 = Not checked yet
+
+Cam 01 evidence:
+- Camera faces toward the back of the pen.
+- Cows are lined up at the feed bunk.
+- The chute appears on the left side.
+
+Reference image:
+data_local/cam01_day_ref.jpg
