@@ -227,3 +227,14 @@ frames/
 *.mp4
 *.jpg
 *.png
+
+# Private hackathon data
+data_local/
+
+# Python environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc

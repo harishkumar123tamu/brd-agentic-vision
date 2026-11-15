@@ -1,0 +1,9 @@
+
+Cam 01 = Front cam 1 (4000 x 3000) - Tentative
+Cam 02 = Front cam 2 (2592 x 1944) - Tentative
+Cam 03 = Back cam (4000 x 3000) - Tentative
+
+Reference images:
+data_local/cam01_day_ref.jpg
+data_local/cam02_day_ref.jpg
+data_local/cam03_day_ref.jpg
