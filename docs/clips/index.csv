@@ -1,0 +1,10 @@
+cow_id,clip,camera,time,kind,description,box_drawn
+C02,out/clips/C02_lying_cam03_1108_1815.mp4,cam03,2026-11-08 18:15:00.000,lying,Longest Day-2 lying bout: 90 min from 18:10,True
+C02,out/clips/C02_missed_feeding_cam03_1108_1631.mp4,cam03,2026-11-08 16:31:00.000,missed_feeding,4 herd-mates feeding at 16:31 while C02 is standing,True
+C02,out/clips/C02_feeding_closeup_cam02_1108_0841.mp4,cam02,2026-11-08 08:41:32.767,feeding_closeup,"C02 at the bunk (cam02); check ears, nose, head carriage",True
+C08,out/clips/C08_lying_cam03_1108_0518.mp4,cam03,2026-11-08 05:18:00.000,lying,Longest Day-2 lying bout: 67 min from 05:13,True
+C08,out/clips/C08_missed_feeding_cam03_1108_1009.mp4,cam03,2026-11-08 10:09:00.000,missed_feeding,4 herd-mates feeding at 10:09 while C08 is standing,True
+C08,out/clips/C08_feeding_closeup_cam02_1108_1422.mp4,cam02,2026-11-08 14:22:44.767,feeding_closeup,"C08 at the bunk (cam02); check ears, nose, head carriage",True
+C03,out/clips/C03_lying_cam03_1108_1129.mp4,cam03,2026-11-08 11:29:00.000,lying,Longest Day-2 lying bout: 61 min from 11:24,True
+C03,out/clips/C03_missed_feeding_cam03_1108_1652.mp4,cam03,2026-11-08 16:52:00.000,missed_feeding,4 herd-mates feeding at 16:52 while C03 is lying,False
+C03,out/clips/C03_feeding_closeup_cam02_1108_0200.mp4,cam02,2026-11-08 02:00:56.633,feeding_closeup,"C03 at the bunk (cam02); check ears, nose, head carriage",True
