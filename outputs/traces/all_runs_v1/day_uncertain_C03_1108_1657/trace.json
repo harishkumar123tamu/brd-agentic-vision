@@ -1,0 +1,118 @@
+{
+ "case": {
+  "case_id": "day_uncertain_C03_1108_1657",
+  "type": "behavior",
+  "cow_id": "C03",
+  "time": "2026-11-08 16:57:30",
+  "rule_label": "lying",
+  "night": "False"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "kind": "plan",
+   "model_output": "```json\n{\n  \"plan\": [\"view\", \"look_time\"],\n  \"why\": \"To determine C03's behavior, we first need an overview of its position and then examine any recent movements or changes in posture.\"\n}\n```",
+   "tools": [
+    "view",
+    "look_time"
+   ]
+  },
+  {
+   "step": 2,
+   "kind": "tool_call",
+   "tool": "view",
+   "result": "cam03 crop of C03 at 16:57:30 (red box = C03)",
+   "images": [
+    "img01_view.jpg"
+   ]
+  },
+  {
+   "step": 3,
+   "kind": "tool_call",
+   "tool": "look_time",
+   "result": "cam03 crops of C03 at offsets -20s, -10s, +0s, +10s, +20s (left to right)",
+   "images": [
+    "img02_look_time.jpg",
+    "img03_look_time.jpg",
+    "img04_look_time.jpg",
+    "img05_look_time.jpg",
+    "img06_look_time.jpg"
+   ]
+  },
+  {
+   "step": 4,
+   "kind": "answer",
+   "round": 1,
+   "model_output": "```json\n{\n  \"behavior\": \"ruminating_standing\",\n  \"confidence\": 0.8,\n  \"evidence\": \"Cow C03 is standing with rhythmic jaw movements, indicating rumination.\"\n}\n```"
+  },
+  {
+   "step": 5,
+   "kind": "self_check",
+   "round": 1,
+   "issues": [
+    "disagrees with rule label 'lying'"
+   ]
+  },
+  {
+   "step": 6,
+   "kind": "tool_call",
+   "tool": "zone_check",
+   "result": "bunk-zone distance -28px (>=0 inside), waterer distance -953px, nearest cow 0.77 body-heights away, 7 cows visible in Cam 03 at this moment",
+   "images": []
+  },
+  {
+   "step": 7,
+   "kind": "answer",
+   "round": 2,
+   "model_output": "```json\n{\n  \"behavior\": \"ruminating_standing\",\n  \"confidence\": 0.8,\n  \"evidence\": \"Cow C03 is standing and appears to be ruminating, as indicated by its posture and lack of movement.\"\n}\n```"
+  },
+  {
+   "step": 8,
+   "kind": "self_check",
+   "round": 2,
+   "issues": [
+    "disagrees with rule label 'lying'"
+   ]
+  },
+  {
+   "step": 9,
+   "kind": "tool_call",
+   "tool": "zoom",
+   "result": "cam03 tight zoom of C03 at 16:57:30 (red box = C03)",
+   "images": [
+    "img07_zoom.jpg"
+   ]
+  },
+  {
+   "step": 10,
+   "kind": "answer",
+   "round": 3,
+   "model_output": "```json\n{\n  \"behavior\": \"ruminating_standing\",\n  \"confidence\": 0.8,\n  \"evidence\": \"Cow C03 is standing and has a steady rhythmic jaw movement, indicating rumination.\"\n}\n```"
+  },
+  {
+   "step": 11,
+   "kind": "self_check",
+   "round": 3,
+   "issues": [
+    "disagrees with rule label 'lying'"
+   ]
+  },
+  {
+   "step": 12,
+   "kind": "decision",
+   "final_label": "ruminating_standing",
+   "method": "agent_corrected_rule",
+   "rule_label": "lying",
+   "agent_label": "ruminating_standing",
+   "agent_confidence": 0.8
+  }
+ ],
+ "final": {
+  "label": "ruminating_standing",
+  "method": "agent_corrected_rule",
+  "agent_label": "ruminating_standing",
+  "agent_confidence": 0.8,
+  "rule_label": "lying"
+ },
+ "seconds": 73.7
+}

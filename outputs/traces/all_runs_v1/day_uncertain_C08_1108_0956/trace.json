@@ -1,0 +1,95 @@
+{
+ "case": {
+  "case_id": "day_uncertain_C08_1108_0956",
+  "type": "behavior",
+  "cow_id": "C08",
+  "time": "2026-11-08 09:56:30",
+  "rule_label": "lying",
+  "night": "False"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "kind": "plan",
+   "model_output": "```json\n{\n  \"plan\": [\"view\", \"look_time\"],\n  \"why\": \"To determine C08's behavior, we first need an overview of its position and then examine any changes in posture or movement over the past 20 seconds.\"\n}\n```",
+   "tools": [
+    "view",
+    "look_time"
+   ]
+  },
+  {
+   "step": 2,
+   "kind": "tool_call",
+   "tool": "view",
+   "result": "cam03 crop of C08 at 09:56:29 (red box = C08)",
+   "images": [
+    "img01_view.jpg"
+   ]
+  },
+  {
+   "step": 3,
+   "kind": "tool_call",
+   "tool": "look_time",
+   "result": "cam03 crops of C08 at offsets -20s, -10s, +0s, +10s, +20s (left to right)",
+   "images": [
+    "img02_look_time.jpg",
+    "img03_look_time.jpg",
+    "img04_look_time.jpg",
+    "img05_look_time.jpg",
+    "img06_look_time.jpg"
+   ]
+  },
+  {
+   "step": 4,
+   "kind": "answer",
+   "round": 1,
+   "model_output": "```json\n{\n  \"behavior\": \"ruminating_lying\",\n  \"confidence\": 0.9,\n  \"evidence\": \"Cow C08 is lying down with its head slightly raised and rhythmic jaw movements indicating rumination.\"\n}\n```"
+  },
+  {
+   "step": 5,
+   "kind": "self_check",
+   "round": 1,
+   "issues": [
+    "disagrees with rule label 'lying'"
+   ]
+  },
+  {
+   "step": 6,
+   "kind": "tool_call",
+   "tool": "zone_check",
+   "result": "bunk-zone distance -782px (>=0 inside), waterer distance -578px, nearest cow 1.93 body-heights away, 7 cows visible in Cam 03 at this moment",
+   "images": []
+  },
+  {
+   "step": 7,
+   "kind": "answer",
+   "round": 2,
+   "model_output": "```json\n{\n  \"behavior\": \"lying\",\n  \"confidence\": 0.9,\n  \"evidence\": \"Cow C08 is lying on the ground with its head slightly raised and no visible signs of ruminating.\"\n}\n```"
+  },
+  {
+   "step": 8,
+   "kind": "self_check",
+   "round": 2,
+   "issues": [
+    "consistent"
+   ]
+  },
+  {
+   "step": 9,
+   "kind": "decision",
+   "final_label": "lying",
+   "method": "agent_verified",
+   "rule_label": "lying",
+   "agent_label": "lying",
+   "agent_confidence": 0.9
+  }
+ ],
+ "final": {
+  "label": "lying",
+  "method": "agent_verified",
+  "agent_label": "lying",
+  "agent_confidence": 0.9,
+  "rule_label": "lying"
+ },
+ "seconds": 15.4
+}

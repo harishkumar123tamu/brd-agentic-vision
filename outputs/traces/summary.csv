@@ -1,0 +1,9 @@
+case_id,type,seconds,label,method,agent_label,agent_confidence,rule_label,swap,confidence,action
+day_uncertain_C03_1108_1657,behavior,71.2,lying,kept_rule_label_conflict_unresolved,ruminating_standing,0.8,lying,,,
+day_uncertain_C08_1108_0956,behavior,19.9,lying,agent_verified,lying,0.9,lying,,,
+night_C06_1108_0017,behavior,18.8,lying,kept_rule_label_conflict_unresolved,ruminating_standing,0.9,lying,,,
+night_C08_1108_0202,behavior,16.6,standing,agent_verified,standing,0.9,standing,,,
+day_feeding_C08_1108_1620,behavior,22.0,feeding,kept_rule_label_conflict_unresolved,ruminating_standing,0.8,feeding,,,
+day_lying_C08_1108_1606,behavior,18.2,lying,kept_rule_label_conflict_unresolved,ruminating_lying,0.8,lying,,,
+idswap_C10_C08_1108_1359,swap,10.1,,,,,,False,0.95,keep IDs
+idswap_C08_C04_1107_2040,swap,12.2,,,,,,False,0.95,keep IDs

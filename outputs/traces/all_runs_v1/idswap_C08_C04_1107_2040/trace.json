@@ -1,0 +1,72 @@
+{
+ "case": {
+  "case_id": "idswap_C08_C04_1107_2040",
+  "type": "swap",
+  "cow_a": "C08",
+  "cow_b": "C04",
+  "start": "2026-11-07 20:40:18.633000",
+  "end": "2026-11-07 20:41:10.567000"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "kind": "plan",
+   "tools": [
+    "view before",
+    "view after"
+   ],
+   "why": "C08 and C04 came within <1 body-height; check the IDs did not swap"
+  },
+  {
+   "step": 2,
+   "kind": "tool_call",
+   "tool": "view",
+   "target": "C08 before",
+   "result": "cam03 crop of C08 at 20:39:38 (red box = C08)"
+  },
+  {
+   "step": 3,
+   "kind": "tool_call",
+   "tool": "view",
+   "target": "C08 after",
+   "result": "cam03 crop of C08 at 20:41:50 (red box = C08)"
+  },
+  {
+   "step": 4,
+   "kind": "tool_call",
+   "tool": "view",
+   "target": "C04 before",
+   "result": "cam03 crop of C04 at 20:39:30 (red box = C04)"
+  },
+  {
+   "step": 5,
+   "kind": "tool_call",
+   "tool": "view",
+   "target": "C04 after",
+   "result": "cam03 crop of C04 at 20:41:40 (red box = C04)"
+  },
+  {
+   "step": 6,
+   "kind": "answer",
+   "model_output": "```json\n{\n  \"swapped\": false,\n  \"confidence\": 0.95,\n  \"evidence\": \"Cow C08 has a visible ear tag and white mark in both images 1 and 2, while cow C04 has no visible ear tag or white mark in either image 3 or 4.\"\n}\n```"
+  },
+  {
+   "step": 7,
+   "kind": "self_check",
+   "issues": [
+    "consistent"
+   ]
+  },
+  {
+   "step": 8,
+   "kind": "decision",
+   "final": "keep IDs"
+  }
+ ],
+ "final": {
+  "swap": false,
+  "confidence": 0.95,
+  "action": "keep IDs"
+ },
+ "seconds": 13.3
+}

@@ -1,0 +1,74 @@
+{
+ "case": {
+  "case_id": "night_C08_1108_0202",
+  "type": "behavior",
+  "cow_id": "C08",
+  "time": "2026-11-08 02:02:30",
+  "rule_label": "standing",
+  "night": "True"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "kind": "plan",
+   "model_output": "```json\n{\n  \"plan\": [\"view\", \"look_time\"],\n  \"why\": \"To determine C08's behavior, first observe its overall posture and activity using the whole-pen camera, then check for any subtle changes in movement or posture over the past 20 seconds.\"\n}\n```",
+   "tools": [
+    "view",
+    "look_time"
+   ]
+  },
+  {
+   "step": 2,
+   "kind": "tool_call",
+   "tool": "view",
+   "result": "cam03 crop of C08 at 02:02:29 (red box = C08)",
+   "images": [
+    "img01_view.jpg"
+   ]
+  },
+  {
+   "step": 3,
+   "kind": "tool_call",
+   "tool": "look_time",
+   "result": "cam03 crops of C08 at offsets -20s, -10s, +0s, +10s, +20s (left to right)",
+   "images": [
+    "img02_look_time.jpg",
+    "img03_look_time.jpg",
+    "img04_look_time.jpg",
+    "img05_look_time.jpg",
+    "img06_look_time.jpg"
+   ]
+  },
+  {
+   "step": 4,
+   "kind": "answer",
+   "round": 1,
+   "model_output": "```json\n{\n  \"behavior\": \"standing\",\n  \"confidence\": 0.9,\n  \"evidence\": \"Cow C08 is standing still with no visible movement or interaction.\"\n}\n```"
+  },
+  {
+   "step": 5,
+   "kind": "self_check",
+   "round": 1,
+   "issues": [
+    "consistent"
+   ]
+  },
+  {
+   "step": 6,
+   "kind": "decision",
+   "final_label": "standing",
+   "method": "agent_verified",
+   "rule_label": "standing",
+   "agent_label": "standing",
+   "agent_confidence": 0.9
+  }
+ ],
+ "final": {
+  "label": "standing",
+  "method": "agent_verified",
+  "agent_label": "standing",
+  "agent_confidence": 0.9,
+  "rule_label": "standing"
+ },
+ "seconds": 20.1
+}
