@@ -149,7 +149,7 @@ The BRD scoring code and Streamlit dashboard have been tested with simulated act
 
 The original cattle videos and extracted frames are stored separately from GitHub because the event data must remain private.
 
-ChatGPT was used for assistance with code development, debugging, and documentation preparation. Final results must be checked against the original recordings and project outputs.
+ChatGPT, and Claude was used for assistance with code development, debugging, and documentation preparation. Final results must be checked against the original recordings and project outputs.
 
 The system is intended for behavior monitoring and further animal observation, not veterinary diagnosis.
 
