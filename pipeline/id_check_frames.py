@@ -50,10 +50,10 @@ for cam, tag in CAMS.items():
             if abs((ts - slot).total_seconds()) > 300:
                 rows.append(dict(cam=cam, day=day, slot=slot, used_ts=None, n_boxes=0, note="no cows detected near this time")); continue
             r = fd.iloc[i]
-            img = grab(clip_path[r.clip], r.t_sec)
+            img = grab(clip_path[r["clip"]], float(r["t_sec"]))
             if img is None:
                 rows.append(dict(cam=cam, day=day, slot=slot, used_ts=ts, n_boxes=0, note="decode failed")); continue
-            s = W / r.frame_w
+            s = W / float(r["frame_w"])
             b = g[g.ts == ts]
             for x in b.itertuples():
                 k = int(x.cow_id[1:]) - 1 if x.cow_id.startswith("C") else 9

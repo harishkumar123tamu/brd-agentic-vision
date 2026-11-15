@@ -1,0 +1,11 @@
+cow_id,risk_score,rank,top_reasons
+C02,0.854,1,feeding time 4.4 vs herd median 6.2 (below herd); bunk visits 21.0 vs herd median 26.5 (below herd); walking/activity 0.2 vs herd median 0.4 (below herd)
+C08,0.814,2,feeding time 5.3 vs herd median 6.2 (below herd); walking/activity 0.2 vs herd median 0.4 (below herd); distance from other cows 1.3 vs herd median 1.1 (above herd)
+C03,0.771,3,lying time 24.7 vs herd median 17.4 (above herd); feeding 6 vs 8 min/visible-h and lying 25 vs 20 (Day 2 vs Day 1); walking/activity 0.3 vs herd median 0.4 (below herd)
+C04,0.583,4,bunk visits 17.0 vs herd median 26.5 (below herd); feeding time 5.4 vs herd median 6.2 (below herd); distance from other cows 1.1 vs herd median 1.1 (above herd)
+C09,0.539,5,feeding time 5.5 vs herd median 6.2 (below herd); bunk visits 20.0 vs herd median 26.5 (below herd); feeding 6 vs 13 min/visible-h and lying 11 vs 16 (Day 2 vs Day 1)
+C01,0.527,6,feeding 7 vs 11 min/visible-h and lying 20 vs 18 (Day 2 vs Day 1); lying time 20.2 vs herd median 17.4 (above herd); bunk visits 25.0 vs herd median 26.5 (below herd)
+C10,0.455,7,feeding 6 vs 14 min/visible-h and lying 17 vs 22 (Day 2 vs Day 1); walking/activity 0.3 vs herd median 0.4 (below herd)
+C05,0.364,8,lying time 26.8 vs herd median 17.4 (above herd); feeding 9 vs 10 min/visible-h and lying 27 vs 20 (Day 2 vs Day 1)
+C06,0.238,9,distance from other cows 1.3 vs herd median 1.1 (above herd); feeding 9 vs 12 min/visible-h and lying 18 vs 18 (Day 2 vs Day 1); lying time 18.3 vs herd median 17.4 (above herd)
+C07,0.052,10,feeding 9 vs 13 min/visible-h and lying 16 vs 18 (Day 2 vs Day 1)
