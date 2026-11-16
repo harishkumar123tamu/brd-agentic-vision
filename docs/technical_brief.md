@@ -1,42 +1,46 @@
-# Pen 6: Cattle Behavior Tracking and BRD Risk Monitoring
+# Pen 6: Agentic Vision for Angus Behavior and BRD Risk
+*Technical brief · Merck–TAMU Animal Science Hackathon 2026 · Team: Harish Kumar Veeraperuma, Suhas, Srikant*
 
-Merck TAMU Animal Science Hackathon, November 2026  
-Team: Harish, Suhas and Srikant
+## Objective
+Watch a pen of 10 Angus cows around the clock from three cameras, know each cow, label what she does every minute, and rank the cows by early behavioral signs of bovine respiratory disease (BRD): eating less, fewer bunk visits, more lying, less activity and standing apart from the herd.
 
-## Background and objective
+## Data
+1,749 five-minute clips (153 GB): 3 cameras × 2 full days (Nov 7–8), day and infrared night. Matched to the pen map: **Cam 03 = back camera** (whole pen), **Cam 01 = front camera** (from the feed bunk down the pen), **Cam 02 = feed-bunk close-up**. Lenses are fisheye. The video is HEVC with a non-standard codec tag, so every decode forces the HEVC decoder. Keyframes arrive every 2 s; we analyse only keyframes (about 264,000 frames, 30 samples per cow-minute), which is about 15× cheaper than decoding every frame.
 
-Accurate monitoring of individual cattle behavior is important when evaluating cattle health, however continuously following individual animals in a group has remained a challenge. Our dataset contains ten black Angus cattle in Pen 6, recorded by three cameras over two days. Since the cattle look similar, relying only on appearance could cause incorrect identities, especially during nighttime infrared recordings or when one animal obstructs another.
+## Approach: two layers
+**Layer 1 (every frame, fast).** YOLO11m (COCO weights, not fine-tuned) detects cows on every keyframe on the TAMU HPRC cluster (18 parallel GPU jobs, about 1 hour). Hand-drawn pen outlines remove cows in neighbouring pens. Black Angus cows look almost identical, and appearance-based tracking had fragmented in our pilot (22 IDs for 10 cows), so identity is solved as a **closed set**: every frame, Cam 03 boxes are matched to exactly 10 persistent cow "slots" (C01–C10) with the Hungarian algorithm. A hidden cow keeps her last position, and a cow missing for over 30 s can be re-acquired. The recording is continuous through midnight, so IDs carry over from Day 1 to Day 2. Cows at the feed bunk are given the same IDs in Cam 01 and Cam 02 by matching their order along the bunk at the same moment. Rules then label every cow-minute: **feeding** (at the bunk zone, or identified at the bunk by a front camera), **drinking** (at the waterer zone), **walking** (foot-point movement), **lying vs standing** (box height relative to the typical standing height at that image position), and **not visible** when no camera sees her.
 
-To address this, we used computer vision to detect cattle, maintain individual identities and organize behavior information by cow and time. The main behaviors of interest were feeding, lying, rumination and movement. Changes in these behaviors may help identify animals that require closer observation, but they cannot independently confirm bovine respiratory disease (BRD).
+**Layer 2 (agentic, only where needed).** A vision-language model (Qwen2.5-VL-7B on one A100) handles uncertain minutes and possible ID swaps. It **plans** which tools it needs (view, zoom, look ±20 s in time, the other camera, zone and neighbour check), **calls** them, **answers** with a behavior and confidence, **checks itself** against the zone geometry and the rule label, and **re-answers** with a new tool, up to 3 rounds. Every run is saved as a trace (`outputs/traces/`).
 
-## Approach
+## Results: Level 1
+- **10 IDs, both days:** 561,455 Cam 03 boxes over 84,099 frames; 50–61k boxes per cow (balanced); 99.1% of assignments are smooth continuations; median 7 cows identified per frame. Bunk cows on Cam 01 / Cam 02 receive a Cam 03 ID in 92% / 93% of cases.
+- **Behavior for all 28,800 cow-minutes** (`outputs/activity.csv`, 6,007 bouts). **67% of cow-minutes are "observed"** (clear view, continuous ID, consistent label); the rest are marked "estimated". 18% are "not visible".
+- **ID risk:** 735 moments where two cows were within one body-height were logged as possible swaps; a sample was checked by the agent.
+- **ID-check frames** every 30 min per camera (`outputs/id_check/`). Missing slots, mostly on the bunk close-up at night, are times when no cow was in that view.
 
-Harish processed the video recordings on the computing cluster using YOLO11m for detection. The recordings required an explicit HEVC decoder setting because of the nonstandard video tag. The detected boxes were cleaned to remove duplicates and cattle outside the target pen. The identity pipeline used Camera 03 as its main reference for C01 to C10 and linked observations from Cameras 01 and 02 when cattle approached the feeding bunk. The system relied on position and movement continuity because appearance alone was not reliable for these cattle.
+**The agent, honestly (the 3 required traces).** In v1, on a cow seen from behind at the bunk, the model claimed "rhythmic jaw movement" (the jaw wasn't visible), ignored the zone check, and overrode a correct *feeding* label with *ruminating*. Across 6 behavior cases, v1 overrode the rules 4 times, always towards rumination: a 7B model on still frames cannot see chewing. We added guard-rails: for feeding minutes it opens the bunk close-up first; its self-check flags "zone says at bunk but answer isn't feeding" and "claims jaw movement without a close-up"; and an unresolved conflict **keeps the rule label and flags it** for review. On the same 8 cases, v2 made 0 unsafe overrides, verified 2, flagged 4, and on the failure case opened the close-up and kept *feeding*. In this setup the agent is most valuable as a **verifier and flagger**, not the primary labeler. Traces: `1_failure` (v1), `2_success` 
+(v2 self-check), `3_night`.
 
-Suhas's behavior pipeline was planned to use tracking information and camera zones for minute-level feeding, drinking, movement and posture estimates. Difficult cases such as rumination, grooming, nighttime visibility and uncertain identities were intended for additional vision language model review. The workflow is:
+## Results: Level 2 (BRD risk)
+Per cow and day we compute feeding time and bunk visits, lying time and activity, all **per visible hour** so a cow that is often hidden is not penalised, plus distance to the nearest cow (isolation) and the Day 1 → Day 2 change. Each feature is compared with the herd on the same day; weights were fixed before seeing results, and the weighted sum is squashed to 0–1.
 
-`Recorded video -> Cow detection -> Tracking and identities -> Cow-minute behavior -> Daily features -> Risk ranking -> Video review`
+**The same three cows rank highest in both scoring versions:**
 
-My work focused on manual detection labels, camera mapping, pen masks, preliminary floor landmarks, the risk scoring code and a Streamlit dashboard. I labeled 60 frames containing 367 cow boxes. The risk code was designed to accept the team activity file, while simulated activity was used initially to test the output and dashboard before real behavior data was available.
+| Cow | Main reasons | Score (`level2/`, used on risk cards) | Score (`outputs/`, adds isolation) |
+|---|---|---|---|
+| **C02** | lowest feeding (≈27% below herd), fewest bunk visits (21 vs ≈27), more lying, low activity | 0.66 (#1) | 0.85 (#1) |
+| **C03** | most lying (367 vs 318 min) and rising Day 1 → Day 2 while feeding drops (≈23% below herd) | 0.64 (#2) | 0.77 (#3) |
+| **C08** | low feeding (≈16% below herd), low activity, worsening vs her own Day 1 | 0.61 (#3) | 0.81 (#2) |
 
-## Results available at the last update
+The `level2/` version uses feeding, visits, lying and activity change. The `outputs/` version also adds isolation and normalises by visible time. Agreement on the top three cows makes the ranking more credible than either score alone. Each top-3 cow has a risk card (`docs/risk_card_C0x.md`) with 3 clips: her longest lying bout, a moment when the herd feeds and she doesn't, and her own bunk visit on the close-up camera. The dashboard (`dashboard/`) shows the ranking, time budgets against the herd, hourly rhythm, ID-check frames and the agent traces.
 
-According to the team status report dated November 14, the dataset consisted of 1,749 clips totaling approximately 153 GB. Harish processed around 264,000 keyframes using YOLO11m. His report described ten identity streams on Camera 03, a 99.1% continuous matching rate and assigned identities for around 92% and 93% of feeding-bunk detections on Cameras 01 and 02. These numbers describe tracking coverage and continuity, not independently verified identity accuracy. Review of possible ID swaps was still in progress at that time.
+## What 10 cows × 2 days can and cannot support
+It supports a **within-herd comparison** and a picture of the daily rhythm. It does **not** support a diagnosis: there are no clinical records, differences between cows are modest, and some or all cows may be healthy. The score says *look at these cows first*; the suggested action is a pen-rider check and rectal temperature.
 
-The pen masks have been saved for all three cameras. Four preliminary floor-point pairs were recorded for Camera 01 and four for Camera 03. Four Camera 02 candidate pairs remain unverified because several physical boundaries are not clearly visible. These points should not be considered a verified geometric calibration.
+## Limitations
+No veterinary ground truth. **Behavior accuracy and ID accuracy are not measured** against hand labels: 60 frames (367 cow boxes) were labeled for detection, but the minute-level behavior labels were not completed. Identity is position-based, so two cows lying together can swap unnoticed. "Drinking" means "near the waterer" (over-counted), and lying is under-counted (6–9 h vs typical 10–14 h) because posture comes from box shape. Rumination, grooming and social interaction are not labeled by rules. Feeding and visibility drop for the whole herd on Day 2, which same-day herd comparison controls for. A full pen-floor map failed for the back camera's shallow fisheye view, so cross-camera IDs are limited to the bunk. Level 3 (live alert) was not built.
 
-The BRD scoring script and Streamlit dashboard have been tested using simulated activity data. The resulting cow ranking is a demonstration of the software and **is not a measurement from the ten recorded cattle**. Verified behavior accuracy, real risk ranking and video evidence cannot be reported until the corresponding team outputs and original clips have been checked.
+## With more data and time
+Clinical records to validate the score; weeks of video for per-cow baselines; a detector fine-tuned on our day and night labels; ear-tag or RFID anchors for identity; calibrated fisheye cameras for one shared floor map; a 30 fps video model for jaw motion (rumination); and the same pipeline run every 5 minutes on new clips to push alerts with evidence clips to a pen rider.
 
-## Risk score and interpretation
-
-The planned features include daily feeding minutes, feeding visits, lying minutes, rumination, activity and changes between the two days. The guide assigns 30% to feeding, 15% to feeding visits, 20% to lying, 15% to rumination, 10% to isolation and 10% to change between days. Reliable isolation estimates require usable floor-position tracking. When those positions are missing, the scoring implementation omits isolation and rescales the available weights.
-
-Each cow is compared with the rest of the herd on the same day and, when possible, with its own earlier observations. The output is a relative score between 0 and 1 for prioritizing video review. It is not a probability of BRD, and a higher score alone should not be reported as a sick animal.
-
-## Limitations and next steps
-
-The dataset includes only ten cattle and two days without veterinary-confirmed BRD outcomes. Occlusion, infrared recordings, fisheye lenses and possible ID swaps can affect the results. The manually reviewed behavior labels and C01 to C10 identity reference need to be completed using genuine video observations. Risk cards for the highest-ranked animals also require real clips and a distinction between what was seen directly and what was estimated by the system.
-
-With additional data, the system could be tested across more pens, longer periods and animals with confirmed clinical outcomes. Those records would make it possible to evaluate whether the monitoring results provide consistent information for actual health decisions.
-
-*Source of reported numbers: Team Status & Remaining Tasks, November 14, 2026, 11:45 PM CST. The final report should be updated if the team's subsequent runs differ.*
+*Reproduce: `PIPELINE.md` (exact commands, models, versions, run times). AI assistance (Claude) was used for planning, code and drafting; all results were run and checked by the team.*
