@@ -1,46 +1,51 @@
-
 # BRD Agentic Vision
 
-A computer vision system that tracks individual cattle, monitors their behavior, and identifies changes that could indicate early signs of bovine respiratory disease (BRD).
+A computer vision prototype that tracks individual cattle, monitors their behavior, and identifies changes that may warrant closer observation for bovine respiratory disease (BRD).
 
-Built at the Merck TAMU Animal Science Hackathon 2026.
+Built for the **Merck–TAMU Animal Science Hackathon 2026**.
 
-**Team:** Srikant, Harish, Suhas
+**Team:** Harish, Suhas, Srikant
 
 ## What it does
 
-Monitoring individual cattle in a group has remained a challenge, especially when the animals have similar physical appearances. Our dataset included ten black Angus cattle in Pen 6, recorded using three cameras over two days.
+Monitoring individual cattle in a group is challenging, especially when animals look similar. Our dataset includes ten black Angus cattle in Pen 6, recorded using three cameras over two days.
 
-The goal of this project was to maintain an individual ID for each cow, track its behavior, and identify changes in feeding, lying, rumination, and movement.
+The system aims to maintain cow identities (C01–C10), estimate activities such as feeding, drinking, lying, and walking, and compare behavior across cows and days. It then ranks cattle for further observation using a relative behavioral risk score.
 
-While these behaviors can provide useful information about cattle health, they cannot independently confirm whether an animal has BRD. Our system uses a comparative risk score to identify cattle that may require closer observation.
+**The score is not a BRD diagnosis or a calibrated probability of disease.** No veterinary-confirmed disease outcomes were available to validate BRD prediction.
 
 ## How it works
 
-- **Cow Detection:** YOLO11m detects cattle in the video recordings. Duplicate detections and boxes outside the selected pen are removed before tracking.
+- **Cow detection:** YOLO11m identifies cattle in video frames. Processing removes duplicate detections and detections outside the selected pen.
+- **Individual tracking:** Camera 03 is the primary source for maintaining cow IDs C01–C10. Cameras 01 and 02 provide additional feeding-bunk observations linked to those identities.
+- **Camera zones:** Pen boundaries, feeding-bunk areas, and water areas support behavior estimation and help exclude cattle in neighboring pens.
+- **Behavior monitoring:** The pipeline produces video-derived activity intervals, including feeding, drinking, lying, walking, and other observed behavior. Subtle behaviors such as rumination still require reliable labeling and verification.
+- **Risk scoring:** Daily behavioral features are compared with herd patterns and, where supported by the data, each cow's previous-day activity.
+- **Dashboard and evidence:** A Streamlit dashboard displays the results. Separate risk cards summarize the three highest-ranked cows and reference supporting video clips.
 
-- **Individual Tracking:** Each animal is assigned an ID from C01 to C10. Camera 03 is used as the main reference, while Cameras 01 and 02 provide additional observations near the feeding bunk.
+For the detection, tracking, and cluster execution workflow, see [PIPELINE.md](PIPELINE.md).
 
-- **Camera Zones:** Pen boundaries, feeding areas, and water areas are marked to help identify cattle behavior and exclude animals from neighboring pens.
+## Final real-data results
 
-- **Behavior Monitoring:** Tracking information and camera zones are used to estimate feeding, drinking, lying, and walking. More difficult observations, such as rumination and grooming, require further verification.
+The current scoring run uses **6,007 video-derived activity intervals** in `outputs/activity.csv`, covering **10 cattle across two days**. The provenance file `level2/risk_source.json` identifies this input as **real**, not simulated. These are model/pipeline-derived observations, not independently verified manual behavior labels.
 
-- **BRD Risk Scoring:** The scoring system compares each animal's behavior with the herd and with its own previous observations.
+| Rank | Cow ID | Relative risk score |
+| --- | --- | ---: |
+| 1 | C02 | 0.6619 |
+| 2 | C03 | 0.6410 |
+| 3 | C08 | 0.6101 |
 
-- **Dashboard:** A Streamlit dashboard displays cow rankings, risk scores, and the behavioral factors contributing to each score.
+The scores are **relative watch-list heuristics**, not disease probabilities. A higher score suggests that a cow may merit closer observation; it does not establish that the animal has BRD.
 
-## Built w/
+**Output files:**
 
-- Python 3.12
-- YOLO11m for cattle detection
-- OpenCV for image processing and annotations
-- FFmpeg for video decoding
-- Pandas and NumPy for data processing
-- PyArrow for tracking data
-- Streamlit for the dashboard
-- SLURM for running processing jobs on the computing cluster
+- `level2/brd_risk.csv`: per-cow ranking and scores.
+- `level2/features.csv`: derived behavioral features.
+- `level2/risk_source.json`: data source and coverage information.
+- `docs/risk_card_C02.md`, `docs/risk_card_C03.md`, `docs/risk_card_C08.md`: the three risk cards.
+- `docs/clips/index.csv`: index of nine referenced evidence clips. Access to underlying footage depends on the team's private video storage; clip references are not independent clinical confirmation.
 
-The team also planned to use Qwen2.5-VL-7B for reviewing difficult behavior observations. Its final deployment details need to be confirmed.
+**Rumination and isolation could not be assessed from the available final scoring inputs.** In particular, isolation was unavailable without suitable location tracks. Do not interpret the original proposed feature weights as the exact formula used for this real-data run; the implemented logic is in `level2/build_risk_real.py`.
 
 ## Run it yourself
 
@@ -51,105 +56,77 @@ git clone https://github.com/harishkumar123tamu/brd-agentic-vision.git
 cd brd-agentic-vision
 ```
 
-### 2. Install dependencies
+### 2. Install the local dependencies
+
+The local dashboard and scoring workflow uses Python 3.12:
 
 ```powershell
 py -3.12 -m pip install pandas numpy opencv-python pyarrow streamlit plotly
 ```
 
-FFmpeg must also be installed to process the video recordings. Some recordings use HEVC encoding with a nonstandard codec tag and require the decoder to be selected explicitly.
+FFmpeg is also needed for video processing. Some source recordings have a nonstandard video-stream layout and may require explicit stream selection. Detection and tracking are intended for the team's cluster/SLURM environment; see `PIPELINE.md` for the available pipeline instructions and confirm cluster-specific paths with the team.
 
-### 3. Run the BRD scoring demonstration
+### 3. Build scores from the real activity data
+
+With `outputs/activity.csv` available, run:
 
 ```powershell
-py -3.12 level2/build_risk.py
+py -3.12 level2/build_risk_real.py --activity outputs/activity.csv --source real
 ```
 
-This generates risk scores using simulated activity data. The results are only for testing the scoring system and do not represent actual cattle health.
+This generates the relative risk outputs in `level2/`. The repository also contains `level2/build_risk.py` for a **separate simulated-data demonstration**; simulated results must not be presented as real cattle observations.
 
 ### 4. Open the dashboard
 
 ```powershell
-py -3.12 -m streamlit run dashboard/app.py
+py -3.12 -m streamlit run dashboard/app_srikant.py
 ```
 
-Open the local URL displayed in the terminal.
+Open the local URL shown in the terminal. Use the real-data outputs above to display the final rankings.
 
-The detection and tracking scripts are located in the `pipeline/` folder, with SLURM scripts for cluster execution. The exact cluster commands and final software versions still need to be documented from the completed runs.
+## Progress and validation status
 
-## BRD Risk Scoring
+The team status report from **November 14, 2026** described approximately 1,749 video clips (153 GB), roughly 264,000 processed keyframes, and tracking of ten identities on Camera 03. It reported 99.1% tracking continuity and identity assignment for approximately 92% and 93% of feeding-bunk detections on Cameras 01 and 02. **Those are team-reported tracking/coverage measures, not independently measured cow-ID accuracy.**
 
-Changes in feeding, lying, rumination, and general activity can provide useful information when evaluating cattle behavior. However, individual animals naturally have different behavior patterns.
+Ground-truth preparation included **60 manually annotated detection frames with 367 cattle bounding boxes**, pen zone definitions for all three cameras, and preliminary floor-reference points. The C01–C10 reference sheet contains tentative observations rather than fully verified cross-day identities.
 
-To address this, the scoring method compares each cow with the herd and, when possible, with its behavior on the previous day.
+The current prototype has real activity-derived risk rankings and three evidence-linked risk cards, but the following validation work remains incomplete:
 
-The intended scoring weights are:
+- **Manual behavior validation:** 0 of the targeted 200–300 independently labeled cow-minutes were completed at the last recorded status.
+- **Cow identification validation:** The ten cow IDs have not been independently verified end-to-end across days and cameras.
+- **Clinical validation:** No veterinary-confirmed BRD labels were available for measuring disease prediction accuracy. Clinical signs in referenced clips have not been independently verified.
 
-- Feeding duration: 30%
-- Feeding visits: 15%
-- Lying duration: 20%
-- Rumination: 15%
-- Isolation: 10%
-- Change between days: 10%
+Consequently, **no manually verified behavior accuracy, cow-ID accuracy, or clinical BRD prediction accuracy is claimed**. See [docs/final_validation_status.md](docs/final_validation_status.md) for the latest documented status. If the team completes validation, that document and this section should be updated.
 
-Isolation is excluded when reliable floor-position tracking is unavailable. The actual features and weights used should be checked before interpreting the results.
+## Challenges
 
-The score is converted into a value between 0 and 1 and is used to rank cattle for further observation. It is not a probability of BRD.
+- **Similar-looking cattle:** Individual recognition is difficult because the animals are all black Angus; tracking relies heavily on movement and position continuity.
+- **Camera visibility:** Occlusion, animals leaving the field of view, and nighttime infrared footage affect tracking and behavior estimation.
+- **Video processing:** The source recordings require care when decoding their video streams.
+- **Calibration:** Some shared physical landmarks and floor-coordinate references remain preliminary.
+- **Behavior verification:** Visible activities can be estimated from video, but subtle behavior and clinical signs require additional manual review.
 
-## Results so far
+## Project files
 
-According to the November 14 team update, the dataset contained 1,749 video clips totaling approximately 153 GB.
+- [`pipeline/`](pipeline/): cattle detection, tracking, cow identification, and cross-camera linking.
+- [`pipeline/zones.json`](pipeline/zones.json): pen, feeding-bunk, and water zones used by the detection pipeline.
+- [`outputs/activity.csv`](outputs/activity.csv): video-derived behavior intervals used for final scoring.
+- [`ground_truth/`](ground_truth/): detection annotations, zone references, calibration, and preliminary cow ID information.
+- [`level2/`](level2/): feature extraction, risk scoring, and real-data outputs.
+- [`dashboard/app_srikant.py`](dashboard/app_srikant.py): Streamlit dashboard used for the final real-data view.
+- [`docs/`](docs/): technical brief, risk cards, clip index, and validation status.
+- [`scripts/`](scripts/): supporting annotation and validation utilities.
+- [`PIPELINE.md`](PIPELINE.md): agent/pipeline documentation supplied by the team.
+- `data_local/`: private source recordings and local files excluded from GitHub.
 
-Harish's detection pipeline processed approximately 264,000 keyframes using YOLO11m. The tracking system maintained ten cow IDs on Camera 03, with a reported 99.1% continuous matching rate.
+## Built with
 
-The system also assigned cow identities to approximately 92% of feeding-bunk detections on Camera 01 and 93% on Camera 02.
+Python 3.12, YOLO11m, OpenCV, FFmpeg, Pandas, NumPy, PyArrow, Streamlit, and SLURM for cluster execution.
 
-These percentages describe tracking continuity and identification coverage, not independently verified cow ID accuracy.
+The team also considered Qwen2.5-VL-7B for difficult behavior observations; its final deployment status is not verified here. ChatGPT and Claude were used to assist with development, debugging, and documentation. Results should be checked against project outputs and original recordings.
 
-For ground truth preparation, 60 frames were manually labeled, containing 367 cow bounding boxes. Pen polygons were prepared for all three cameras.
+## Data privacy
 
-Camera 01 and Camera 03 each contain four preliminary floor-coordinate pairs. Camera 02 has four candidate pairs that have not yet been verified.
+Original video footage and extracted private frames are kept outside the public code repository. Do not upload source videos, sensitive images, or private local files to GitHub. Derived outputs and annotations should be shared only according to the team's data permissions.
 
-The BRD scoring code and Streamlit dashboard have been tested with simulated activity data. Actual cattle risk rankings require the completed behavior records and supporting video evidence.
-
-## Challenges we ran into
-
-- **Similar-looking cattle:** All ten animals are black Angus, making individual identification difficult. We relied more on location and movement continuity instead of appearance alone.
-
-- **Camera Visibility:** Cattle frequently obstruct one another, and some animals move outside the camera view. Nighttime infrared recordings further reduce the visible details.
-
-- **Video Processing:** The recordings use HEVC encoding with a nonstandard codec tag, which required an explicit FFmpeg decoder setting.
-
-- **Camera Calibration:** Not all pen boundaries are visible from every camera, making it difficult to identify matching physical landmarks.
-
-- **Behavior Verification:** Feeding and lying can be estimated from camera observations, but rumination and other subtle behaviors require more detailed review.
-
-## What's next
-
-- Complete the C01 to C10 cow reference sheet using verified ID-check images.
-- Validate behavior predictions using manually reviewed video recordings.
-- Replace simulated activity data with actual cow behavior records.
-- Verify possible cow ID changes during tracking.
-- Add real behavior comparisons and video evidence to the dashboard.
-- Prepare risk cards for the three highest-ranked cattle using actual observations.
-- Evaluate the system using longer recordings and veterinary-confirmed health information.
-
-## Project Files
-
-- `pipeline/`: Cow detection, tracking, identification, and cross-camera linking.
-- `pipeline/zones.json`: Pen, feeding bunk, and water zones used by Harish's pipeline.
-- `ground_truth/`: Manual annotations, preliminary pen masks, and floor calibration.
-- `level2/`: Behavioral feature calculations and BRD risk scoring.
-- `dashboard/`: Streamlit risk monitoring dashboard.
-- `docs/`: Technical brief and supporting documentation.
-- `scripts/`: Supporting annotation and validation tools.
-- `data_local/`: Private video recordings and temporary data excluded from GitHub.
-
-## Data Privacy and External Tools
-
-The original cattle videos and extracted frames are stored separately from GitHub because the event data must remain private.
-
-ChatGPT, and Claude was used for assistance with code development, debugging, and documentation preparation. Final results must be checked against the original recordings and project outputs.
-
-The system is intended for behavior monitoring and further animal observation, not veterinary diagnosis.
-
+This project is a **behavior-monitoring and relative risk-ranking prototype**, not a substitute for animal-health assessment or veterinary diagnosis.
