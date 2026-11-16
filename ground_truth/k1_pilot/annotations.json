@@ -1,0 +1,600 @@
+[
+  {
+    "sample_id": "K1_001",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "consistently identifiable",
+    "behavior": "standing",
+    "intervals": "Standing throughout reviewed minute; no behavior change reported.",
+    "confidence": "medium",
+    "identity_status": "unverified",
+    "notes": "User confirmed clear playback, consistently identifiable target, standing and no behavior change. Previously supplied confidence: medium. Cow ID remains tracker-only, not independently verified.",
+    "review_status": "human_labeled_identity_unverified",
+    "cow_id": "C01",
+    "day": "Day 1",
+    "minute": "2026-11-07 06:25:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261107062431003.Avi",
+        "sec_start": 29.0,
+        "sec_end": 89.0,
+        "start_time": "2026-11-07 06:25:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 600,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_019",
+    "reviewer": "",
+    "playback_quality": "",
+    "target_visibility": "",
+    "behavior": "",
+    "intervals": "",
+    "confidence": "",
+    "identity_status": "unverified",
+    "notes": "",
+    "review_status": "pending",
+    "cow_id": "C01",
+    "day": "Day 2",
+    "minute": "2026-11-08 01:20:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108011544003.Avi",
+        "sec_start": 256.0,
+        "sec_end": 300.0,
+        "start_time": "2026-11-08 01:20:00"
+      },
+      {
+        "clip_file": "Event20261108012044003.Avi",
+        "sec_start": 0.0,
+        "sec_end": 16.0,
+        "start_time": "2026-11-08 01:20:44"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 0,
+    "total_frames": 600,
+    "annotation_origin": null
+  },
+  {
+    "sample_id": "K1_031",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "consistently identifiable",
+    "behavior": "lying",
+    "intervals": "No behavior change reported throughout reviewed minute.",
+    "confidence": "high",
+    "identity_status": "unverified",
+    "notes": "User wording: sitting. Normalized to project class lying, interpreting sitting as resting on the ground with folded legs; this interpretation was disclosed to user. Identity remains tracker-only.",
+    "review_status": "human_labeled_identity_unverified",
+    "cow_id": "C02",
+    "day": "Day 1",
+    "minute": "2026-11-07 02:59:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [
+      {
+        "clip_file": "Event20261107025417003.Avi",
+        "sec_start": 283.0,
+        "sec_end": 300.0,
+        "start_time": "2026-11-07 02:59:00"
+      },
+      {
+        "clip_file": "Event20261107025917003.Avi",
+        "sec_start": 0.0,
+        "sec_end": 43.0,
+        "start_time": "2026-11-07 02:59:17"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 600,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_037",
+    "reviewer": "",
+    "playback_quality": "",
+    "target_visibility": "",
+    "behavior": "",
+    "intervals": "",
+    "confidence": "",
+    "identity_status": "unverified",
+    "notes": "",
+    "review_status": "pending",
+    "cow_id": "C02",
+    "day": "Day 2",
+    "minute": "2026-11-08 06:08:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108060602003.Avi",
+        "sec_start": 118.0,
+        "sec_end": 178.0,
+        "start_time": "2026-11-08 06:08:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 0,
+    "total_frames": 600,
+    "annotation_origin": null
+  },
+  {
+    "sample_id": "K1_049",
+    "reviewer": "",
+    "playback_quality": "",
+    "target_visibility": "",
+    "behavior": "",
+    "intervals": "",
+    "confidence": "",
+    "identity_status": "unverified",
+    "notes": "",
+    "review_status": "pending",
+    "cow_id": "C03",
+    "day": "Day 1",
+    "minute": "2026-11-07 06:35:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261107063432003.Avi",
+        "sec_start": 28.0,
+        "sec_end": 88.0,
+        "start_time": "2026-11-07 06:35:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 0,
+    "total_frames": 600,
+    "annotation_origin": null
+  },
+  {
+    "sample_id": "K1_067",
+    "reviewer": "",
+    "playback_quality": "",
+    "target_visibility": "",
+    "behavior": "",
+    "intervals": "",
+    "confidence": "",
+    "identity_status": "unverified",
+    "notes": "",
+    "review_status": "pending",
+    "cow_id": "C03",
+    "day": "Day 2",
+    "minute": "2026-11-08 00:01:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108000039003.Avi",
+        "sec_start": 21.0,
+        "sec_end": 81.0,
+        "start_time": "2026-11-08 00:01:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 294,
+    "total_frames": 600,
+    "annotation_origin": null
+  },
+  {
+    "sample_id": "K1_079",
+    "reviewer": "",
+    "playback_quality": "",
+    "target_visibility": "",
+    "behavior": "",
+    "intervals": "",
+    "confidence": "",
+    "identity_status": "unverified",
+    "notes": "",
+    "review_status": "pending",
+    "cow_id": "C04",
+    "day": "Day 1",
+    "minute": "2026-11-07 02:34:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [],
+    "extraction_status": "extraction_failed",
+    "extraction_error": "Video gap at 2026-11-07 02:34:15.333333",
+    "boxed_frames": 0,
+    "total_frames": 0,
+    "annotation_origin": null
+  },
+  {
+    "sample_id": "K1_085",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "consistently identifiable",
+    "behavior": "lying",
+    "intervals": "No behavior change reported throughout reviewed minute.",
+    "confidence": "high",
+    "identity_status": "unverified",
+    "notes": "User wording: sitting. Normalized to project class lying, interpreting sitting as resting on the ground with folded legs. Identity remains tracker-only.",
+    "review_status": "human_labeled_identity_unverified",
+    "cow_id": "C04",
+    "day": "Day 2",
+    "minute": "2026-11-08 08:48:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108084613003.Avi",
+        "sec_start": 107.0,
+        "sec_end": 167.0,
+        "start_time": "2026-11-08 08:48:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 600,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_097",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "consistently identifiable",
+    "behavior": "social_interaction",
+    "intervals": "Visible physical interaction/tussling for more than half the minute; movement and head movement also reported. Exact intervals unspecified.",
+    "confidence": "medium",
+    "identity_status": "unverified",
+    "notes": "User initially described standing, head movement, tussling and movement throughout clip, then confirmed visible physical interaction occupying more than half the minute. Majority label social_interaction. Cow identity remains tracker-only.",
+    "review_status": "human_labeled_identity_unverified",
+    "cow_id": "C05",
+    "day": "Day 1",
+    "minute": "2026-11-07 07:53:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261107074937003.Avi",
+        "sec_start": 203.0,
+        "sec_end": 263.0,
+        "start_time": "2026-11-07 07:53:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 541,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_115",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "partly identifiable",
+    "behavior": "lying",
+    "intervals": "No behavior change reported throughout reviewed minute; target only partly identifiable.",
+    "confidence": "medium",
+    "identity_status": "unverified",
+    "notes": "User wording: sitting and sleeping. Sitting normalized to lying. Sleeping retained as reviewer impression, not confirmed or a project class. Partial target visibility requires review before inclusion in primary accuracy metrics. Identity remains tracker-only.",
+    "review_status": "human_labeled_partial_visibility_needs_review",
+    "cow_id": "C05",
+    "day": "Day 2",
+    "minute": "2026-11-08 00:28:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108002540003.Avi",
+        "sec_start": 140.0,
+        "sec_end": 200.0,
+        "start_time": "2026-11-08 00:28:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 600,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_127",
+    "reviewer": "",
+    "playback_quality": "",
+    "target_visibility": "",
+    "behavior": "",
+    "intervals": "",
+    "confidence": "",
+    "identity_status": "unverified",
+    "notes": "",
+    "review_status": "pending",
+    "cow_id": "C06",
+    "day": "Day 1",
+    "minute": "2026-11-07 01:19:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [],
+    "extraction_status": "extraction_failed",
+    "extraction_error": "Video gap at 2026-11-07 01:19:10.433333",
+    "boxed_frames": 0,
+    "total_frames": 0,
+    "annotation_origin": null
+  },
+  {
+    "sample_id": "K1_133",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "partly identifiable",
+    "behavior": "lying",
+    "intervals": "No behavior change reported throughout reviewed minute; target only partly identifiable.",
+    "confidence": "high",
+    "identity_status": "unverified",
+    "notes": "User reports lying with no change and high confidence, but target is only partly identifiable. Partial visibility requires review before inclusion in primary cow-specific accuracy metrics. Identity remains tracker-only.",
+    "review_status": "human_labeled_partial_visibility_needs_review",
+    "cow_id": "C06",
+    "day": "Day 2",
+    "minute": "2026-11-08 06:18:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108061603003.Avi",
+        "sec_start": 117.0,
+        "sec_end": 177.0,
+        "start_time": "2026-11-08 06:18:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 600,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_145",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "consistently identifiable",
+    "behavior": "standing",
+    "intervals": "Standing and idle throughout; no behavior-class change reported.",
+    "confidence": "high",
+    "identity_status": "unverified",
+    "notes": "User confirmed target remained identifiable and idle/standing while neighboring cows tussled. Social interaction was not attributed to the target. Cow identity remains tracker-only.",
+    "review_status": "human_labeled_identity_unverified",
+    "cow_id": "C07",
+    "day": "Day 1",
+    "minute": "2026-11-07 06:23:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261107061931003.Avi",
+        "sec_start": 209.0,
+        "sec_end": 269.0,
+        "start_time": "2026-11-07 06:23:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 462,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_163",
+    "reviewer": "",
+    "playback_quality": "",
+    "target_visibility": "",
+    "behavior": "",
+    "intervals": "",
+    "confidence": "",
+    "identity_status": "unverified",
+    "notes": "",
+    "review_status": "pending",
+    "cow_id": "C07",
+    "day": "Day 2",
+    "minute": "2026-11-08 00:01:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108000039003.Avi",
+        "sec_start": 21.0,
+        "sec_end": 81.0,
+        "start_time": "2026-11-08 00:01:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 167,
+    "total_frames": 600,
+    "annotation_origin": null
+  },
+  {
+    "sample_id": "K1_175",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "consistently identifiable",
+    "behavior": "standing",
+    "intervals": "Standing predominates; approximately 5 seconds walking (took steps). Exact interval start/end not supplied.",
+    "confidence": "high",
+    "identity_status": "unverified",
+    "notes": "User confirmed clear playback, identifiable target, standing with a position change clarified as taking steps for 5 seconds. Majority-duration label standing; mixed behavior retained. Cow identity remains tracker-only.",
+    "review_status": "human_labeled_identity_unverified",
+    "cow_id": "C08",
+    "day": "Day 1",
+    "minute": "2026-11-07 00:52:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [
+      {
+        "clip_file": "Event20261107004909003.Avi",
+        "sec_start": 171.0,
+        "sec_end": 231.0,
+        "start_time": "2026-11-07 00:52:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 575,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_181",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "consistently identifiable",
+    "behavior": "standing",
+    "intervals": "Standing throughout reviewed minute; no behavior change reported.",
+    "confidence": "medium",
+    "identity_status": "unverified",
+    "notes": "User confirmed clear playback, identifiable target, standing and no behavior change. Identity remains tracker-only.",
+    "review_status": "human_labeled_identity_unverified",
+    "cow_id": "C08",
+    "day": "Day 2",
+    "minute": "2026-11-08 08:45:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108084112003.Avi",
+        "sec_start": 228.0,
+        "sec_end": 288.0,
+        "start_time": "2026-11-08 08:45:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 600,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_193",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "consistently identifiable",
+    "behavior": "standing",
+    "intervals": "Standing throughout; tail movement only, no behavior-class change reported.",
+    "confidence": "high",
+    "identity_status": "unverified",
+    "notes": "User confirmed clear playback, identifiable target, standing and tail movement only. Tail movement does not establish walking or grooming. Cow identity remains tracker-only.",
+    "review_status": "human_labeled_identity_unverified",
+    "cow_id": "C09",
+    "day": "Day 1",
+    "minute": "2026-11-07 06:58:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261107065433003.Avi",
+        "sec_start": 207.0,
+        "sec_end": 267.0,
+        "start_time": "2026-11-07 06:58:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 554,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_211",
+    "reviewer": "",
+    "playback_quality": "",
+    "target_visibility": "",
+    "behavior": "",
+    "intervals": "",
+    "confidence": "",
+    "identity_status": "unverified",
+    "notes": "",
+    "review_status": "pending",
+    "cow_id": "C09",
+    "day": "Day 2",
+    "minute": "2026-11-08 00:59:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108005543003.Avi",
+        "sec_start": 197.0,
+        "sec_end": 257.0,
+        "start_time": "2026-11-08 00:59:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 0,
+    "total_frames": 600,
+    "annotation_origin": null
+  },
+  {
+    "sample_id": "K1_223",
+    "reviewer": "Suhas",
+    "playback_quality": "clear",
+    "target_visibility": "consistently identifiable",
+    "behavior": "lying",
+    "intervals": "Lying throughout reviewed minute; no behavior change reported.",
+    "confidence": "high",
+    "identity_status": "unverified",
+    "notes": "User confirmed clear playback, identifiable target, lying and no behavior change. Identity remains tracker-only.",
+    "review_status": "human_labeled_identity_unverified",
+    "cow_id": "C10",
+    "day": "Day 1",
+    "minute": "2026-11-07 00:46:00",
+    "camera": "cam03",
+    "period_by_clock": "night",
+    "source_segments": [
+      {
+        "clip_file": "Event20261107004409003.Avi",
+        "sec_start": 111.0,
+        "sec_end": 171.0,
+        "start_time": "2026-11-07 00:46:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 600,
+    "total_frames": 600,
+    "annotation_origin": "Human video review in chat; assistant transcribed and normalized class names"
+  },
+  {
+    "sample_id": "K1_229",
+    "reviewer": "",
+    "playback_quality": "",
+    "target_visibility": "",
+    "behavior": "",
+    "intervals": "",
+    "confidence": "",
+    "identity_status": "unverified",
+    "notes": "",
+    "review_status": "pending",
+    "cow_id": "C10",
+    "day": "Day 2",
+    "minute": "2026-11-08 07:04:00",
+    "camera": "cam03",
+    "period_by_clock": "daylight",
+    "source_segments": [
+      {
+        "clip_file": "Event20261108070106003.Avi",
+        "sec_start": 174.0,
+        "sec_end": 234.0,
+        "start_time": "2026-11-08 07:04:00"
+      }
+    ],
+    "extraction_status": "ready_for_human_review",
+    "extraction_error": null,
+    "boxed_frames": 42,
+    "total_frames": 600,
+    "annotation_origin": null
+  }
+]

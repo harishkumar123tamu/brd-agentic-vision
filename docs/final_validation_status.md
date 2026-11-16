@@ -25,7 +25,7 @@ The scores are relative behavioral risk estimates, not BRD diagnoses or disease 
 
 ## Validation Limitations
 
-Manual behavior validation remains incomplete: 0 of the target 200-300 cow-minutes were independently labeled.
+Manual behavior validation remains incomplete. Suhas has provided 11 human-reviewed cow-minute annotations in an initial 20-sample pilot (18 extracted, 2 extraction failures). Two annotations have partial target visibility, and all cow identities remain unverified. No second-reviewer agreement or behavior accuracy has been calculated. See [K1/K2 review checkpoint](k1_k2_review_checkpoint.md) for records, provenance and limitations.
 
 The cow reference sheet contains preliminary observations for C01-C10, but cross-day identities have not been independently verified.
 
