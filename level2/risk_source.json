@@ -1,0 +1,16 @@
+{
+  "activity_file": "outputs/activity.csv",
+  "tracks_file": null,
+  "is_simulated": false,
+  "source_status": "real",
+  "input_rows": 6007,
+  "cow_count": 10,
+  "days": [
+    1,
+    2
+  ],
+  "minimum_cow_day_coverage_min": 1285.0,
+  "total_observed_min": 20130.0,
+  "total_coverage_min": 28006.0,
+  "note": "Risk score is a relative watch-list heuristic, NOT BRD diagnosis or probability"
+}

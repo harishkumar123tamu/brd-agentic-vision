@@ -1,0 +1,11 @@
+cow_id,risk_score,rank,top_reasons
+C02,0.6619,1,Feeding time 27% below day-2 herd average; Fewer feeding visits (21 vs herd avg 27.8); More lying (353 min vs herd avg 318 min)
+C03,0.641,2,Feeding time 23% below day-2 herd average; More lying (367 min vs herd avg 318 min); Worrying activity change compared with own day 1
+C08,0.6101,3,Feeding time 16% below day-2 herd average; Worrying activity change compared with own day 1; Fewer feeding visits (23 vs herd avg 27.8)
+C04,0.5949,4,Fewer feeding visits (17 vs herd avg 27.8); Worrying activity change compared with own day 1; Feeding time 7% below day-2 herd average
+C01,0.5918,5,Worrying activity change compared with own day 1; More lying (339 min vs herd avg 318 min); Fewer feeding visits (25 vs herd avg 27.8)
+C10,0.5471,6,Worrying activity change compared with own day 1; Feeding time 11% below day-2 herd average
+C09,0.5386,7,Feeding time 22% below day-2 herd average; Worrying activity change compared with own day 1; Fewer feeding visits (20 vs herd avg 27.8)
+C05,0.4457,8,More lying (432 min vs herd avg 318 min); Worrying activity change compared with own day 1
+C07,0.367,9,Worrying activity change compared with own day 1
+C06,0.3617,10,Worrying activity change compared with own day 1; More lying (324 min vs herd avg 318 min)

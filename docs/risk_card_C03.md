@@ -1,6 +1,6 @@
 # BRD risk review: C03
 
-**Selection:** Team-selected top-three candidate. Exact rank and risk score not verified.
+**Risk score:** 0.6410 | **Rank:** 2 (relative heuristic, not diagnosis)
 **Interpretation:** Relative behavior flag, not a BRD diagnosis.
 
 ## Activity compared with herd medians
