@@ -1,5 +1,5 @@
 # Pen 6: Agentic Vision for Angus Behavior and BRD Risk
-*Technical brief · Merck–TAMU Animal Science Hackathon 2026 · Team: Harish Kumar Veeraperuma, Suhas, Srikant*
+*Technical brief · Merck–TAMU Animal Science Hackathon 2026 · Team: Harish Kumar Veeraperumal, Suhas, Srikant*
 
 ## Objective
 Watch a pen of 10 Angus cows around the clock from three cameras, know each cow, label what she does every minute, and rank the cows by early behavioral signs of bovine respiratory disease (BRD): eating less, fewer bunk visits, more lying, less activity and standing apart from the herd.
